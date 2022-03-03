@@ -7,24 +7,11 @@ function Counrty(name, short, population, flag, continent){
 }
 
 //components
-const menuButton = () =>{
-    return `
-    <button id="menuButton">
-        <svg width="40" height="40">
-            <rect width="20" height="2"/>
-            <rect width="20" height="2"/>
-            <rect width="20" height="2"/>
-        </svg>
-        <span>button</span>
-    </buton>
-    `
-}
-
-const header = (logo, button) =>{
+const header = (logo) =>{
     return `
     <header>
         <a id="logo">${logo}</a>
-        ${button()}
+        <button></button>
     </header>
     `
 }
@@ -46,8 +33,6 @@ const countryCard = (name, short, population, flag, continent) =>{
     `
 }
 
-
-
 const loadEvent = async () => {
     //get data
     const countryRes = await fetch("https://restcountries.com/v3.1/all");
@@ -61,7 +46,7 @@ const loadEvent = async () => {
     console.log(countries)
 
     const rootElement = document.getElementById("root")
-    rootElement.insertAdjacentHTML("beforeend", header("Countries", menuButton ))
+    rootElement.insertAdjacentHTML("beforeend", header("Countries"))
 
 
 
@@ -71,10 +56,7 @@ const loadEvent = async () => {
     }
     rootElement.insertAdjacentHTML( "beforeend", countryCards( content ) )
     
-    const gotMenuButton = document.getElementById("menuButton");
-    gotMenuButton.addEventListener("click", (event) =>{
-        event.target.classList.toggle("clicked")
-    })
+    
 
 }
 window.addEventListener("load", loadEvent)
